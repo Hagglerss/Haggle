@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 test</title>
+</head>
+<body>
+
+ <div>
+     결제 금액 : <input type="text" id="amount">
+     <button onclick="requestPayment()">결제하기</button>
+ </div>
+
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script>
+    function requestPayment(){
+        const amount = $("#amount");
+        const IMP = IMP.init("imp80318134");
+        IMP.request_pay(
+            {
+                pg: "kakaopay",
+                pay_method : "card",
+                name : "고전적물병",
+                amount : amount,
+                buyer_email : "beekeepers202311@gmail.com",
+                buyer_name : "금일벌",
+                buyer_tell : "010-1234-1234",
+                buyer_addr : "그것까지알아야하니 서울시어쩌구",
+                buyer_postcode : "010010",
+                m_redirect_url : "", // 모바일 결제 이후 리다이렉션 url
+            },
+            async (rsp) => {
+                // callback 함수
+                if(rsp.success){
+                    // 결제 성공시
+                    await axios.post(
+                        "http://localhost/", // 결제성공시 이동주소!!!
+                        {
+                            query:
+                        }
+                    )
+                }
+            }
+        )
+
+    }
+</script>
+</body>
+</html>

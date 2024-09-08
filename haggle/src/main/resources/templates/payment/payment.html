@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>결제 test</title>
+</head>
+<body>
+
+ <div>
+     결제 금액 : <input type="text" id="amount">
+     <button onclick="requestPayment()">결제하기</button>
+ </div>
+
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+ <script src="https://cdn.portone.io/v2/browser-sdk.js"></script> // 포트원 SDK _ CDN 방식
+<!-- <script src="https://cdn.iamport.kr/v1/iamport.js"></script>-->
+ <script>
+    function requestPayment(){
+        const amount = $("#amount");
+        const IMP = IMP.init("imp80318134");
+        IMP.request_pay( // IMP.request_pay(param, callback)로 결제창 호출
+            {
+                pg: "kakaopay",
+                pay_method : "card",
+                merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
+                name : "고전적물병",
+                amount : amount,
+                buyer_email : "beekeepers202311@gmail.com",
+                buyer_name : "금일벌",
+                buyer_tell : "010-1234-1234",
+                buyer_addr : "서울시어쩌구 말벌아저씨네",
+                buyer_postcode : "010010",
+                // m_redirect_url : "", // 모바일 결제 이후 리다이렉션 url,
+                custom_message : "haggle의 결제페이지입니다"
+            },
+            function(rsp){ // callback로직
+                if(rsp.success){
+                    console.log(JSON.stringify(rsp));
+                    //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
+                    jQuery.ajax({
+                        url : "/payment/complete",
+                        method : "POST",
+                        dataType : 'json',
+                        headers : {"Content-Type" : "application/json"},
+                        data : JSON.stringify({
+                            "payment_uid" : rsp.imp_uid, // 결제 고유번호
+                            "order_uid" : rsp.merchant_uid // 주문번호
+                        })
+                    }).done(function(response){
+                        //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
+                        console.log("결제완료. 결제 정보 : " + response);
+                        if (everythings_fine){
+                            // 가맹점 서버 결제 API 성공시 로직
+                            alert('결제가 완료되었습니다.' + rsp);
+                            window.location.href = "/success-payment"; //  성공시 이동 url
+                        } else {
+                        //[3] 아직 제대로 결제가 되지 않았습니다.
+                        //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
+                    }
+                    });
+                } else {
+                    alert("결제가 실패하였습니다. 다시 시도해주세요." + rsp);
+                }
+            }
+        )};
+</script>
+</body>
+</html>

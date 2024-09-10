@@ -7,23 +7,41 @@
 <body>
 
  <div>
+     <div>
      결제 금액 : <input type="text" id="amount">
+     </div>
+     <div>
+         결제 수단 :
+         <input type="radio" name="payment" id="kakaopay"><label for="kakaopay">카카오페이</label></input>
+         <input type="radio" name="payment" id="html5_inicis"><label for="html5_inicis">이니시스</label></button>
+         <input type="radio" name="payment" id="tosspayments"><label for="tosspayments">토스페이</label></button>
+         <input type="radio" name="payment" id="naverpay"><label for="naverpay">네이버페이</label></button>
+         <input type="radio" name="payment" id="ksnet"><label for="ksnet">카드결제</label></button>
+         <input type="radio" name="payment" id="danal_tpay"><label for="danal_tpay">다날</label></button>
+         <input type="radio" name="payment" id="payco"><label for="payco">payco</label></button>
+     </div>
+     <br>
      <button onclick="requestPayment()">결제하기</button>
  </div>
 
 
  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
- <script src="https://cdn.portone.io/v2/browser-sdk.js"></script> // 포트원 SDK _ CDN 방식
+<!-- <script src="https://cdn.portone.io/v2/browser-sdk.js"></script> // 포트원 SDK _ CDN 방식-->
+ <script src="https://cdn.iamport.kr/js/iamport.payment-1.2.0.js"></script> <!--포트원 SDK _ CDN 방식-->
 <!-- <script src="https://cdn.iamport.kr/v1/iamport.js"></script>-->
  <script>
+     const IMP = window.IMP;
+     IMP.init("imp80318134");
+
+     let amount = $("#amount");
+     let payment = '"' + $('input:radio[name="payment"]:checked').attr('id') + '"';
+
     function requestPayment(){
-        const amount = $("#amount");
-        const IMP = IMP.init("imp80318134");
         IMP.request_pay( // IMP.request_pay(param, callback)로 결제창 호출
             {
-                pg: "kakaopay",
+                pg: payment,
                 pay_method : "card",
-                merchant_uid: "order_no_0001", // 상점에서 관리하는 주문 번호
+                merchant_uid: "order_no_0003", // 상점에서 관리하는 주문 번호
                 name : "고전적물병",
                 amount : amount,
                 buyer_email : "beekeepers202311@gmail.com",
@@ -36,9 +54,9 @@
             },
             function(rsp){ // callback로직
                 if(rsp.success){
-                    console.log(JSON.stringify(rsp));
+                    console.log("결제성공 rsp = " + JSON.stringify(rsp));
                     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-                    jQuery.ajax({
+                    /*jQuery.ajax({
                         url : "/payment/complete",
                         method : "POST",
                         dataType : 'json',
@@ -58,9 +76,9 @@
                         //[3] 아직 제대로 결제가 되지 않았습니다.
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
-                    });
+                    });*/
                 } else {
-                    alert("결제가 실패하였습니다. 다시 시도해주세요." + rsp);
+                    alert("결제가 실패하였습니다. 다시 시도해주세요." + rsp.error_msg);
                 }
             }
         )};

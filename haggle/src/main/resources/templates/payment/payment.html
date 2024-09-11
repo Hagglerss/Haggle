@@ -13,12 +13,12 @@
      <div>
          결제 수단 :
          <input type="radio" name="payment" id="kakaopay"><label for="kakaopay">카카오페이</label></input>
-         <input type="radio" name="payment" id="html5_inicis"><label for="html5_inicis">이니시스</label></button>
-         <input type="radio" name="payment" id="tosspayments"><label for="tosspayments">토스페이</label></button>
-         <input type="radio" name="payment" id="naverpay"><label for="naverpay">네이버페이</label></button>
-         <input type="radio" name="payment" id="ksnet"><label for="ksnet">카드결제</label></button>
-         <input type="radio" name="payment" id="danal_tpay"><label for="danal_tpay">다날</label></button>
-         <input type="radio" name="payment" id="payco"><label for="payco">payco</label></button>
+<!--         <input type="radio" name="payment" id="html5_inicis"><label for="html5_inicis">이니시스</label></input>-->
+<!--         <input type="radio" name="payment" id="tosspayments"><label for="tosspayments">토스페이</label></input>-->
+<!--         <input type="radio" name="payment" id="naverpay"><label for="naverpay">네이버페이</label></input>-->
+<!--         <input type="radio" name="payment" id="ksnet"><label for="ksnet">카드결제</label></input>-->
+<!--         <input type="radio" name="payment" id="danal_tpay"><label for="danal_tpay">다날</label></input>-->
+<!--         <input type="radio" name="payment" id="payco"><label for="payco">payco</label></input>-->
      </div>
      <br>
      <button onclick="requestPayment()">결제하기</button>
@@ -34,14 +34,14 @@
      IMP.init("imp80318134");
 
      let amount = $("#amount");
-     let payment = '"' + $('input:radio[name="payment"]:checked').attr('id') + '"';
+     // let payment = '"' + $('input:radio[name="payment"]:checked').attr('id') + '"';
 
     function requestPayment(){
         IMP.request_pay( // IMP.request_pay(param, callback)로 결제창 호출
             {
-                pg: payment,
+                pg: "kakaopay",
                 pay_method : "card",
-                merchant_uid: "order_no_0003", // 상점에서 관리하는 주문 번호
+                merchant_uid: "order_no_0005", // 상점에서 관리하는 주문 번호
                 name : "고전적물병",
                 amount : amount,
                 buyer_email : "beekeepers202311@gmail.com",
@@ -56,14 +56,14 @@
                 if(rsp.success){
                     console.log("결제성공 rsp = " + JSON.stringify(rsp));
                     //[1] 서버단에서 결제정보 조회를 위해 jQuery ajax로 imp_uid 전달하기
-                    /*jQuery.ajax({
+                    jQuery.ajax({
                         url : "/payment/complete",
                         method : "POST",
                         dataType : 'json',
-                        headers : {"Content-Type" : "application/json"},
+                        headers : {"Content-Type" : "application/json", "charset" : "UTF-8"},
                         data : JSON.stringify({
-                            "payment_uid" : rsp.imp_uid, // 결제 고유번호
-                            "order_uid" : rsp.merchant_uid // 주문번호
+                            "payment_uid" : rsp.imp_uid, // 결제 고유번호 imp_988262331365
+                            "order_uid" : rsp.merchant_uid // 주문번호 order_no_0003
                         })
                     }).done(function(response){
                         //[2] 서버에서 REST API로 결제정보확인 및 서비스루틴이 정상적인 경우
@@ -71,12 +71,12 @@
                         if (everythings_fine){
                             // 가맹점 서버 결제 API 성공시 로직
                             alert('결제가 완료되었습니다.' + rsp);
-                            window.location.href = "/success-payment"; //  성공시 이동 url
+                            window.location.href = "/payment/successPayment"; //  성공시 이동 url
                         } else {
                         //[3] 아직 제대로 결제가 되지 않았습니다.
                         //[4] 결제된 금액이 요청한 금액과 달라 결제를 자동취소처리하였습니다.
                     }
-                    });*/
+                    });
                 } else {
                     alert("결제가 실패하였습니다. 다시 시도해주세요." + rsp.error_msg);
                 }

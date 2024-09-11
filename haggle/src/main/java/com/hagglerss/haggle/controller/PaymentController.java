@@ -1,7 +1,13 @@
 package com.hagglerss.haggle.controller;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.Map;
 
 @Controller
 @RequestMapping("/payment")
@@ -10,6 +16,23 @@ public class PaymentController {
     @RequestMapping("")
     public String movePayment() {
         return "payment/payment";
+    }
+
+    @RequestMapping(value = "/complete", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String testPayCompleteJSON(@RequestBody Map<String, Object> paramMap){
+        System.out.println(paramMap.get("payment_uid")); // imp_428796449209
+        System.out.println(paramMap.get("order_uid")); // order_no_0005
+
+        // 결제정보 확인 로직
+        // - 정상 유저인지, 정상 결제인지
+        // json으로 return
+        return "test success";
+    }
+
+    @RequestMapping("/successPayment")
+    public String moveSuccessPayment(HttpServletRequest request, HttpServletResponse response){
+        return "";
     }
 
 

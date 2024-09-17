@@ -18,9 +18,14 @@ public class PaymentController {
         return "payment/payment";
     }
 
+    /* 결제 승인 후 로직  */
     @RequestMapping(value = "/complete", produces = "application/json; charset=UTF-8")
     @ResponseBody
     public String testPayCompleteJSON(@RequestBody Map<String, Object> paramMap){
+
+
+
+
         System.out.println(paramMap.get("payment_uid")); // imp_428796449209
         System.out.println(paramMap.get("order_uid")); // order_no_0005
 
@@ -33,6 +38,21 @@ public class PaymentController {
     @RequestMapping("/successPayment")
     public String moveSuccessPayment(HttpServletRequest request, HttpServletResponse response){
         return "";
+    }
+
+
+    /* 주문번호 생성 */
+    @RequestMapping(value = "/getMerchantUid", produces = "application/json; charset=UTF-8")
+    @ResponseBody
+    public String getMerchantUid(){
+
+        String merchantUid = null;
+
+        // 스노우플레이크 방식
+        long id = 0L;
+        long timestamp = System.currentTimeMillis();
+
+        return merchantUid;
     }
 
 

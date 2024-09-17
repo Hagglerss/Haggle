@@ -82,6 +82,24 @@
                 }
             }
         )};
+
+
+    // 주문번호 생성
+    function makeMerchantUid(){
+        $.ajax({
+            url : "/payment/getMerchantUid",
+            method : "POST",
+            dataType: 'json',
+            success : function (data){
+                alert(data);
+            },
+            error : function (data){
+                alert(data.error);
+            }
+        })
+    }
+
+
 </script>
 </body>
 </html>

@@ -37,11 +37,14 @@
      // let payment = '"' + $('input:radio[name="payment"]:checked').attr('id') + '"';
 
     function requestPayment(){
+
+        let merchantUid = makeMerchantUid();
+
         IMP.request_pay( // IMP.request_pay(param, callback)로 결제창 호출
             {
                 pg: "kakaopay",
                 pay_method : "card",
-                merchant_uid: "order_no_0005", // 상점에서 관리하는 주문 번호
+                merchant_uid: merchantUid, // 상점에서 관리하는 주문 번호
                 name : "고전적물병",
                 amount : amount,
                 buyer_email : "beekeepers202311@gmail.com",
@@ -91,7 +94,7 @@
             method : "POST",
             dataType: 'json',
             success : function (data){
-                alert(data);
+                console.log("merchantUid : " + data);
             },
             error : function (data){
                 alert(data.error);

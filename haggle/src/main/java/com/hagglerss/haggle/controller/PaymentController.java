@@ -24,20 +24,20 @@ public class PaymentController {
     @ResponseBody
     public String testPayCompleteJSON(@RequestBody Map<String, Object> paramMap){
 
-
-
-
         System.out.println(paramMap.get("payment_uid")); // imp_428796449209
         System.out.println(paramMap.get("order_uid")); // order_no_0005
 
-        // 결제정보 확인 로직
+        // 결제정보 검증 로직
         // - 정상 유저인지, 정상 결제인지
+        // 검증실패 : 결제정보 에러 / 결제금액과 요청금액 비교
         // json으로 return
         return "test success";
     }
 
     @RequestMapping("/successPayment")
     public String moveSuccessPayment(HttpServletRequest request, HttpServletResponse response){
+        // 결제 완료 로직 처리(DB) 후
+        // 결제 완료 페이지로 이동
         return "";
     }
 
@@ -53,7 +53,7 @@ public class PaymentController {
         return merchantUid;
     }
 
-    
+
 
 
 }

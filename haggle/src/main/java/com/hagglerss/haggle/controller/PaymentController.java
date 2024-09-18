@@ -1,5 +1,6 @@
 package com.hagglerss.haggle.controller;
 
+import com.hagglerss.haggle.util.SimpleSnowflakeGenerator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Controller;
@@ -44,16 +45,15 @@ public class PaymentController {
     /* 주문번호 생성 */
     @RequestMapping(value = "/getMerchantUid", produces = "application/json; charset=UTF-8")
     @ResponseBody
-    public String getMerchantUid(){
-
-        String merchantUid = null;
-
-        // 스노우플레이크 방식
-        long id = 0L;
-        long timestamp = System.currentTimeMillis();
+    public long getMerchantUid(){
+       SimpleSnowflakeGenerator generator = new SimpleSnowflakeGenerator();
+        long merchantUid = generator.generateId();
+        System.out.println("merchantUid : " + merchantUid);
 
         return merchantUid;
     }
+
+    
 
 
 }

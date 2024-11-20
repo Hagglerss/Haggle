@@ -1,0 +1,17 @@
+/* 네비바 */
+.nav-container { display: flex; gap: 20px; }
+.nav-item {list-style: none; position: relative;}
+.nav-item-sub {  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%; /* 부모 요소의 가로 중앙 */
+  transform: translateX(-50%); /* 왼쪽으로 50% 이동하여 중앙 정렬 */
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  list-style: none;
+
+}
+
+.nav-item:hover .nav-item-sub { display: block;}
+.sub-container{ display: flex; width: 1000px;}

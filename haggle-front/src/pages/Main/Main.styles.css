@@ -1,0 +1,109 @@
+/* 네비바 */
+.nav-container { display: flex; gap: 20px; }
+
+.nav-container a {text-decoration-line:none; color: black;}
+.nav-container ul { padding: 0;}
+.nav-container .nav-item li {list-style-type: none; padding: 3px 0;}
+.nav-item {list-style: none; position: relative;}
+.nav-item-sub {  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%; /* 부모 요소의 가로 중앙 */
+  transform: translateX(-50%); /* 왼쪽으로 50% 이동하여 중앙 정렬 */
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.247);
+  list-style: none;
+
+}
+
+.nav-item:hover .nav-item-sub { display: block;}
+.sub-container{ display: flex; width: 1000px;}
+
+
+/* Haggle 로고 */
+.title-logo {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+}
+
+/* 검색 */
+.main-search-container {
+  padding-bottom: 40px;
+  display: flex;
+  justify-content: center;
+}
+.main-search .ant-input-outlined:hover {
+  border-color: #AADB99;
+}
+.main-search .ant-input-outlined:focus {
+  border-color: #AADB99; 
+}
+.main-search .ant-input:hover {
+  border-color: #AADB99;
+}
+.main-search .ant-input:focus {
+  border-color: #AADB99;
+}
+
+/* 네비바 */
+.main-nav {
+  border-top: 1px solid #d3d3d3;
+  border-bottom: 1px solid #d3d3d3;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* 메인 콘텐츠 */
+.main-contents {
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.main-contents > div {
+  width: 80%;
+  padding-bottom: 20px;
+}
+
+/* 메인콘텐츠-인기 카테고리 */
+.popularCate-container {
+  display: flex;
+  justify-content: space-between;
+}
+.popularCate-container > div {
+  margin: 10px;
+  width: 200px;
+  height: 200px;
+  border-radius: 200px;
+  background-color: #d3d3d3;
+}
+
+
+/* 메인콘텐츠-숏폼 광고 */
+.shorts-container {
+  display: flex;
+  justify-content:space-between;
+}
+.shorts-container > div {
+  margin: 10px;
+  width: 20%;
+  height: 350px;
+  border-radius: 20px;
+  background-color: #d3d3d3;
+}
+
+
+
+/* 임시====== */
+.popularCate-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popularCate-container a{
+ text-decoration: none;
+}

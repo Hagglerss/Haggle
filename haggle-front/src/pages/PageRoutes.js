@@ -3,8 +3,10 @@ import { Route, Routes, Navigate } from "react-router-dom";
 import MainPage from "./Main/Main";
 import { BuyProductList } from "./Product/BuyProduct/BuyProductList";
 import { BuyProductPayment as Payment } from "./Product/BuyProduct/BuyProductPayment";
+import { BuyProductPaymentResult as PaymentResult } from "./Product/BuyProduct/BuyProductPaymentResult";
 import { Signin } from "./User/Signin";
 import { SellProduct } from "./Product/SellProduct/SellProduct";
+import { CSIndex } from "./CS/CSIndex";
 import { AdminPage } from "./Admin/Admin";
 
 export const PageRoutes = () =>{
@@ -15,8 +17,10 @@ export const PageRoutes = () =>{
       <Route path="/" element={ <MainPage/>}/> {/* 메인페이지 */}
       <Route path="/buy/list" element={ <BuyProductList/> } /> {/* 구매 상품 목록 */}
       <Route path="/buy/detail/payment" element={ <Payment/> } />  {/* 결제 페이지 /buy/detail/{상품번호}/payment 느낌으로 되어야할듯함 */}
+      <Route path="/buy/detail/payment/result" element={ <PaymentResult/> } />  {/* 결제 결과 페이지 */}\
       <Route path="/sign-in" element={ <Signin/> } /> {/* 회원가입 */}
-      <Route path="/sell" element={ <SellProduct/> } /> {/* 판매 상품 등록 */}
+      <Route path="/sell" element={ <SellProduct/> } /> {/* 판매 상품 등록 */}    
+      <Route path="/help/home" element={ <CSIndex/> } /> {/* CS페이지 메인 */}    
       <Route path="/admin" element={ <AdminPage/> } /> {/* 관리자 페이지 */}
     </Routes>
   );

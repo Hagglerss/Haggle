@@ -12,6 +12,10 @@ public class CSController {
         return "cs/cs_main";
     }
 
+    @RequestMapping("/write")
+    public String moveWritePage(){
+        return "cs/write";
+    }
 
 
 }

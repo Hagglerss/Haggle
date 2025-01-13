@@ -10,7 +10,7 @@ export const BuyProductList = () => {
     <>
       <Header/>
 
-      <div style={{height:"300px"}}>여기 내용</div>
+      <div style={{height:"300px"}}>상품 목록 조회</div>
       
       <Footer/>
     </>

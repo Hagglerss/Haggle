@@ -7,6 +7,7 @@ import { BuyProductPaymentResult as PaymentResult } from "./Product/BuyProduct/B
 import { Signin } from "./User/Signin";
 import { SellProduct } from "./Product/SellProduct/SellProduct";
 import { CSIndex } from "./CS/CSIndex";
+import { AdminPage } from "./Admin/Admin";
 
 export const PageRoutes = () =>{
 
@@ -20,6 +21,7 @@ export const PageRoutes = () =>{
       <Route path="/sign-in" element={ <Signin/> } /> {/* 회원가입 */}
       <Route path="/sell" element={ <SellProduct/> } /> {/* 판매 상품 등록 */}    
       <Route path="/help/home" element={ <CSIndex/> } /> {/* CS페이지 메인 */}    
+      <Route path="/admin" element={ <AdminPage/> } /> {/* 관리자 페이지 */}
     </Routes>
   );
 }
